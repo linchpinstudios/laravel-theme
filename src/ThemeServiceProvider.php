@@ -1,4 +1,4 @@
-<?php namespace Teepluss\Theme;
+<?php namespace Linchpinstudios\Theme;
 
 use Illuminate\Support\ServiceProvider;
 
@@ -31,10 +31,10 @@ class ThemeServiceProvider extends ServiceProvider {
      */
     public function register()
     {
-        $configPath = __DIR__.'/../config/theme.php';
+        $configPath = __DIR__.'/config/theme.php';
 
         // Merge config to allow user overwrite.
-        $this->mergeConfigFrom($configPath, 'theme');
+        $this->mergeConfigFrom( $configPath, 'theme' );
 
         // Temp to use in closure.
         $app = $this->app;
@@ -89,7 +89,7 @@ class ThemeServiceProvider extends ServiceProvider {
             return new Theme($app['config'], $app['events'], $app['view'], $app['asset'], $app['files'], $app['breadcrumb']);
         });
 
-        $this->app->alias('theme', 'Teepluss\Theme\Contracts\Theme');
+        $this->app->alias('theme', 'Linchpinstudios\Theme\Contracts\Theme');
     }
 
     /**

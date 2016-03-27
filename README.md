@@ -23,7 +23,7 @@ Once Theme is installed you need to register the service provider with the appli
 ~~~
 'providers' => [
 
-    'Teepluss\Theme\ThemeServiceProvider',
+    'Linchpinstudios\Theme\ThemeServiceProvider',
 
 ]
 ~~~
@@ -33,7 +33,7 @@ Theme also ships with a facade which provides the static syntax for creating col
 ~~~
 'aliases' => [
 
-    'Theme' => 'Teepluss\Theme\Facades\Theme',
+    'Theme' => 'Linchpinstudios\Theme\Facades\Theme',
 
 ]
 ~~~
@@ -41,7 +41,7 @@ Theme also ships with a facade which provides the static syntax for creating col
 Publish config using artisan CLI.
 
 ~~~
-php artisan vendor:publish --provider="Teepluss\Theme\ThemeServiceProvider"
+php artisan vendor:publish --provider="Linchpinstudios\Theme\ThemeServiceProvider"
 ~~~
 
 ## Usage
@@ -598,7 +598,7 @@ echo Theme::widget('demo', array('label' => 'Demo Widget'))->render();
 
 ### Using theme global
 ~~~php
-use Teepluss\Theme\Contracts\Theme;
+use Linchpinstudios\Theme\Contracts\Theme;
 use App\Http\Controllers\Controller;
 
 class BaseController extends Controller {
@@ -606,7 +606,7 @@ class BaseController extends Controller {
     /**
      * Theme instance.
      *
-     * @var \Teepluss\Theme\Theme
+     * @var \Linchpinstudios\Theme\Theme
      */
     protected $theme;
 

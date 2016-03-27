@@ -1,4 +1,4 @@
-<?php namespace Teepluss\Theme;
+<?php namespace Linchpinstudios\Theme;
 
 use Closure;
 use ReflectionClass;
@@ -7,12 +7,12 @@ use Illuminate\View\Factory;
 use Illuminate\Config\Repository;
 use Illuminate\Events\Dispatcher;
 use Illuminate\Filesystem\Filesystem;
-use Teepluss\Theme\Compilers\TwigCompiler;
+use Linchpinstudios\Theme\Compilers\TwigCompiler;
 use Illuminate\View\Compilers\BladeCompiler;
 use Symfony\Component\HttpFoundation\Cookie;
-use Teepluss\Theme\Contracts\Theme as ThemeContract;
+use Linchpinstudios\Theme\Contracts\Theme as ThemeContract;
 
-class Theme implements ThemeContract 
+class Theme implements ThemeContract
 {
     /**
      * Theme namespace.
@@ -130,11 +130,11 @@ class Theme implements ThemeContract
      * @param  \Illuminate\Config\Repository $config
      * @param  \Illuminate\Events\Dispatcher $events
      * @param  \Illuminate\View\Factory $view |
-     * @param  \Teepluss\Theme\asset $asset
+     * @param  \Linchpinstudios\Theme\asset $asset
      * @param  \Illuminate\Filesystem\Filesystem $files
-     * @param  \Teepluss\Breadcrumb|\Teepluss\Theme\Breadcrumb $breadcrumb
+     * @param  \Teepluss\Breadcrumb|\Linchpinstudios\Theme\Breadcrumb $breadcrumb
      *
-     * @return \Teepluss\Theme\Theme
+     * @return \Linchpinstudios\Theme\Theme
      */
     public function __construct(Repository $config,
                                 Dispatcher $events,
@@ -518,10 +518,10 @@ class Theme implements ThemeContract
         // If region not found, create a new region.
         if (isset($this->regions[$region])) {
             switch ($type) {
-                case 'prepend' : 
+                case 'prepend' :
                     $this->regions[$region] = $value.$this->regions[$region];
                     break;
-                case 'append' : 
+                case 'append' :
                     $this->regions[$region] .= $value;
                     break;
             }
@@ -668,7 +668,7 @@ class Theme implements ThemeContract
      * @param  string $className
      * @param  array $attributes
      * @throws UnknownWidgetClassException
-     * @return Teepluss\Theme\Widget
+     * @return Linchpinstudios\Theme\Widget
      */
     public function widget($className, $attributes = array())
     {
@@ -855,7 +855,7 @@ class Theme implements ThemeContract
     /**
      * Return asset instance.
      *
-     * @return \Teepluss\Theme\Asset
+     * @return \Linchpinstudios\Theme\Asset
      */
     public function asset()
     {
@@ -865,7 +865,7 @@ class Theme implements ThemeContract
     /**
      * Return breadcrumb instance.
      *
-     * @return \Teepluss\Theme\Breadcrumb
+     * @return \Linchpinstudios\Theme\Breadcrumb
      */
     public function breadcrumb()
     {

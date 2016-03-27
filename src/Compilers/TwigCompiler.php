@@ -1,4 +1,4 @@
-<?php namespace Teepluss\Theme\Compilers;
+<?php namespace Linchpinstudios\Theme\Compilers;
 
 use Twig_Environment;
 use Twig_Loader_Array;
@@ -44,7 +44,7 @@ class TwigCompiler implements CompilerInterface {
      *
      * @param \Illuminate\Config\Repository $config
      * @param  \Illuminate\View\Factory $   view
-     * @return \Teepluss\Theme\Compilers\TwigCompiler
+     * @return \Linchpinstudios\Theme\Compilers\TwigCompiler
      */
     public function __construct(Repository $config, $view)
     {

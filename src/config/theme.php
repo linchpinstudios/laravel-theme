@@ -61,11 +61,10 @@ return array(
     */
 
     'containerDir' => array(
-        'layout'  => 'layouts',
-        'asset'   => 'assets',
-        'partial' => 'partials',
-        'widget'  => 'widgets',
-        'view'    => 'views'
+        'core'  => 'core',
+        'email'  => 'email',
+        'modules'  => 'modules',
+        'core'  => 'core',
     ),
 
     /*

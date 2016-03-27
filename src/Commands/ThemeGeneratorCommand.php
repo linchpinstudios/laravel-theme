@@ -1,10 +1,11 @@
-<?php namespace Teepluss\Theme\Commands;
+<?php namespace Linchpinstudios\Theme\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Config\Repository;
 use Illuminate\Filesystem\Filesystem as File;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
+use Linchpinstudios\Theme\Helpers\StubProcess;
 
 class ThemeGeneratorCommand extends Command {
 
@@ -37,17 +38,33 @@ class ThemeGeneratorCommand extends Command {
     protected $files;
 
     /**
+     * Filesystem
+     *
+     * @var Illuminate\Filesystem\Filesystem
+     */
+    protected $composer;
+
+    /**
+     * Working Directory
+     *
+     * @var Illuminate\Filesystem\Filesystem
+     */
+    protected $workingDir = '/../resources/stubs/theme';
+
+    /**
      * Create a new command instance.
      *
      * @param \Illuminate\Config\Repository     $config
      * @param \Illuminate\Filesystem\Filesystem $files
-     * @return \Teepluss\Theme\Commands\ThemeGeneratorCommand
+     * @return \Linchpinstudios\Theme\Commands\ThemeGeneratorCommand
      */
     public function __construct(Repository $config, File $files)
     {
         $this->config = $config;
 
         $this->files = $files;
+
+        $this->composer = app()['composer'];
 
         parent::__construct();
     }
@@ -59,63 +76,29 @@ class ThemeGeneratorCommand extends Command {
      */
     public function fire()
     {
+
+        $data = [
+            'themeName' => $this->getTheme(),
+            'data' => date(F d, Y G:i:s),
+        ];
+
+        $processor = new StubProcess( $this->getTheme(), $this->getPath(null) );
+
         // The theme is already exists.
         if ($this->files->isDirectory($this->getPath(null)))
         {
             return $this->error('Theme "'.$this->getTheme().'" is already exists.');
         }
 
-        $type = $this->option('type');
+        // Directories.
+        $directory = $this->config->get('theme.containerDir');
 
-        if ( ! in_array($type, array('php', 'blade', 'twig')))
-        {
-            // Blade or html.
-            $question = $this->ask('What type of template? [php|blade|twig]');
+        $process = $processor->getFiles( $this->workingDir );
 
-            $type = in_array($question, array('php', 'blade', 'twig')) ? $question : 'php';
-        }
+        $this->info('Theme "'.$this->getTheme().'" has been created.');
 
-        // // Directories.
-        // $container = $this->config->get('theme.containerDir');
-        //
-        // $this->makeDir($container['asset'].'/scss');
-        // $this->makeDir($container['asset'].'/js');
-        // $this->makeDir($container['asset'].'/img');
-        // $this->makeDir($container['layout']);
-        // $this->makeDir($container['partial']);
-        // $this->makeDir($container['view']);
-        // $this->makeDir($container['widget']);
-        //
-        // // Default layout.
-        // $layout = $this->config->get('theme.layoutDefault');
-        //
-        // // Make file example.
-        // switch ($type)
-        // {
-        //     case 'blade' :
-        //         $this->makeFile('layouts/'.$layout.'.blade.php', $this->getTemplate('layout.blade'));
-        //         $this->makeFile('partials/header.blade.php', $this->getTemplate('header'));
-        //         $this->makeFile('partials/footer.blade.php', $this->getTemplate('footer'));
-        //         break;
-        //
-        //     case 'twig' :
-        //         $this->makeFile('layouts/'.$layout.'.twig.php', $this->getTemplate('layout.twig'));
-        //         $this->makeFile('partials/header.twig.php', $this->getTemplate('header'));
-        //         $this->makeFile('partials/footer.twig.php', $this->getTemplate('footer'));
-        //         break;
-        //
-        //     default :
-        //         $this->makeFile('layouts/'.$layout.'.php', $this->getTemplate('layout'));
-        //         $this->makeFile('partials/header.php', $this->getTemplate('header'));
-        //         $this->makeFile('partials/footer.php', $this->getTemplate('footer'));
-        //         break;
-        // }
-        //
-        // // Generate inside config.
-        // $this->makeFile('config.php', $this->getTemplate('config'));
-        //
-        // $this->info('Theme "'.$this->getTheme().'" has been created.');
     }
+
 
     /**
      * Make directory.
@@ -140,6 +123,8 @@ class ThemeGeneratorCommand extends Command {
      */
     protected function makeFile($file, $template = null)
     {
+
+
         if ( ! $this->files->exists($this->getPath($file)))
         {
             $content = $this->getPath($file);
@@ -174,7 +159,7 @@ class ThemeGeneratorCommand extends Command {
      */
     protected function getTheme()
     {
-        return strtolower($this->argument('name'));
+        return strtolower( $this->argument('name') );
     }
 
     /**
@@ -197,9 +182,9 @@ class ThemeGeneratorCommand extends Command {
      */
     protected function getArguments()
     {
-        return array(
-            array('name', InputArgument::REQUIRED, 'Name of the theme to generate.'),
-        );
+        return [
+            ['name', InputArgument::REQUIRED, 'Name of the theme to generate.'],
+        ];
     }
 
     /**
@@ -213,7 +198,6 @@ class ThemeGeneratorCommand extends Command {
 
         return array(
             array('path', null, InputOption::VALUE_OPTIONAL, 'Path to theme directory.', $path),
-            array('type', null, InputOption::VALUE_OPTIONAL, 'Theme view type [php|blade|twig].', null),
             array('facade', null, InputOption::VALUE_OPTIONAL, 'Facade name.', null),
         );
     }

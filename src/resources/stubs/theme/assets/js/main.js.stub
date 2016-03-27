@@ -3,7 +3,6 @@
 define('main', function(require) {
 
   let $ = require('jquery');
-  let log = require('browser/log')('main');
 
   class Main {
 

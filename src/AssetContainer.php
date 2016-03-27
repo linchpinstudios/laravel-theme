@@ -1,4 +1,4 @@
-<?php namespace Teepluss\Theme;
+<?php namespace Linchpinstudios\Theme;
 
 use Closure;
 use Illuminate\Support\Str;

@@ -24,7 +24,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Teepluss\\Theme\\": "src/"
+      "Linchpinstudios\\Theme\\": "src/"
     },
     "classmap": [
       "src/Exceptions.php"

@@ -1,0 +1,15 @@
+@extends('{{themeName}}.layouts.default')
+
+@section('title', '{{themeName}} Index')
+
+
+@section('meta')
+    
+@endsection
+
+
+@section('content')
+
+
+
+@endsection
