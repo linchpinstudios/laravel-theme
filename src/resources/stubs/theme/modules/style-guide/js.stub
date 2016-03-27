@@ -1,0 +1,26 @@
+
+'use strict';
+
+let $ = require('jquery');
+let log = require('browser/log')('module:style-guide');
+
+/**
+ * Style Guide for everyone
+ *
+ * @Module StyleGuide
+ * @version 0.1.0
+ * @author {{author}}
+ *
+ * Generated on {{date}}
+ */
+
+class StyleGuide {
+
+  constructor(element, config) {
+
+    log('StyleGuide : Initialized');
+  }
+
+}
+
+Module.exports = StyleGuide;

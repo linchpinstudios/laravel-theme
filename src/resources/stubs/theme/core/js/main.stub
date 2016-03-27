@@ -1,0 +1,40 @@
+'use strict';
+
+define('main', function(require) {
+
+  let $ = require('jquery');
+  let log = require('browser/log')('main');
+
+  class Main {
+
+    constructor() {
+      // initialize all components with data-component attributes
+      this.init('component');
+      // initialize all modules with data-module attributes
+      this.init('module');
+    }
+
+    init(attrType) {
+      this[attrType] = [];
+      let $elements = $(`[data-${attrType}]`);
+      if($elements.length) {
+        $elements.each( (idx, elem) => {
+          let $el = $(elem);
+          let name = $el.attr(`data-${attrType}`);
+          let config = $el.attr('data-config');
+          if( config && config.length > 0 ) {
+            config = JSON.parse(config);
+          }
+          let Definition = require(name);
+          log(`Main : Initializing ${attrType} : ${name}`);
+          this[attrType].push(new Definition(elem, config));
+        });
+      }
+    }
+
+  }
+
+  // Singleton
+  return new Main();
+
+});

@@ -1,0 +1,26 @@
+
+'use strict';
+
+let $ = require('jquery');
+let log = require('browser/log')('module:{{module}}');
+
+/**
+ * {{description}}
+ *
+ * @Module {{Module}}
+ * @version 0.1.0
+ * @author {{author}}
+ *
+ * Generated on {{date}}
+ */
+
+class {{Module}} {
+
+  constructor(element, config) {
+
+    log('{{Module}} : Initialized');
+  }
+
+}
+
+Module.exports = {{Module}};

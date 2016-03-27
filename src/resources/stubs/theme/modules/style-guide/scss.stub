@@ -1,0 +1,20 @@
+@import "../../core/styles/_variables";
+@import "../../core/styles/_mixins";
+
+.style-guide {
+
+}
+
+
+@media #{$tablet-only} {
+  .style-guide{
+
+  }
+}
+
+
+@media #{$mobile-only} {
+  .style-guide{
+
+  }
+}
